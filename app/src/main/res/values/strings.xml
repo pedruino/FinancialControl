@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">FinancialControl</string>
+    <string name="new_wallet">New Wallet</string>
+    <string name="hint_wallet_name">Type the wallet name</string>
+    <string name="add">Add</string>
+    <string name="error_field_required_wallet_name">The field \'name\' is required.</string>
+    <string name="new_entry">New Entry</string>
+    <string name="total">Total: </string>
+</resources>
