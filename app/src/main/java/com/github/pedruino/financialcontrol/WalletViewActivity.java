@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader;
 import com.github.pedruino.financialcontrol.adapter.EntryAdapter;
 import com.github.pedruino.financialcontrol.data.FakeDatabase;
 import com.github.pedruino.financialcontrol.model.Entry;
@@ -28,6 +29,7 @@ public class WalletViewActivity extends AppCompatActivity implements View.OnClic
     private EntryAdapter entryAdapter;
     private List<Entry> entries;
     private Wallet wallet;
+    private RecyclerViewHeader entriesRecyclerViewHeader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,15 +38,15 @@ public class WalletViewActivity extends AppCompatActivity implements View.OnClic
 
         Intent intent = getIntent();
 
-        this.wallet = (Wallet) intent.getSerializableExtra(PARAM_WALLET);
         final int walletIndex = intent.getIntExtra(PARAM_WALLET_INDEX, 0);
-        this.wallet.getEntries().addAll(FakeDatabase.getInstance().getWallets().get(walletIndex).getEntries());
-        this.entries = FakeDatabase.getInstance().getWallets().get(walletIndex).getEntries();
+        this.wallet = FakeDatabase.getInstance().getWallets().get(walletIndex);//(Wallet) intent.getSerializableExtra(PARAM_WALLET);
+        this.entries = this.wallet.getEntries();
 
         this.addEntryButton = findViewById(R.id.activity_wallet_view_create_entry_button);
         this.addEntryButton.setOnClickListener(this);
 
         this.summaryViewText = findViewById(R.id.activity_wallet_view_summary_text_view);
+        this.refreshBalance();
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         this.entryAdapter = new EntryAdapter(this.entries, this);
@@ -52,6 +54,9 @@ public class WalletViewActivity extends AppCompatActivity implements View.OnClic
         this.entriesRecyclerView = findViewById(R.id.activity_wallet_view_entries_recycler_view);
         this.entriesRecyclerView.setAdapter(this.entryAdapter);
         this.entriesRecyclerView.setLayoutManager(linearLayoutManager);
+
+        this.entriesRecyclerViewHeader = findViewById(R.id.activity_wallet_view_entries_recycler_view_header);
+        this.entriesRecyclerViewHeader.attachTo(this.entriesRecyclerView);
     }
 
     @Override
@@ -70,13 +75,20 @@ public class WalletViewActivity extends AppCompatActivity implements View.OnClic
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == ADD_CODE && resultCode == RESULT_OK) {
-            Entry entry = (Entry) data.getSerializableExtra(EntryEditActivity.PARAM_ENTRY);
+            Entry entry = null;
+            if (data != null) {
+                entry = (Entry) data.getSerializableExtra(EntryEditActivity.PARAM_ENTRY);
+            }
             this.entries.add(entry);
             this.entryAdapter.notifyDataSetChanged();
 
-            String balance = new StringBuilder().append(this.getResources().getString(R.string.total)).append(Helper.currencyFormat(this.wallet.getBalance())).toString();
-            this.summaryViewText.setText(balance);
+            refreshBalance();
         }
+    }
+
+    private void refreshBalance() {
+        String balance = this.getResources().getString(R.string.total) + Helper.currencyFormat(this.wallet.getBalance());
+        this.summaryViewText.setText(balance);
     }
 
 

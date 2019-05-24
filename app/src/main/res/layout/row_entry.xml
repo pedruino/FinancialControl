@@ -7,14 +7,17 @@
 
     <TextView
         android:id="@+id/row_entry_value_text_view"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Valor" />
+        android:layout_weight="1"
+        android:text="The entry value"
+        android:textAlignment="center" />
 
     <TextView
         android:id="@+id/row_entry_date_text_view"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Data" />
-
+        android:layout_weight="1"
+        android:text="The entry date"
+        android:textAlignment="center" />
 </LinearLayout>

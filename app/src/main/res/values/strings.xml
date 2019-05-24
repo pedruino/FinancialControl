@@ -6,4 +6,6 @@
     <string name="error_field_required_wallet_name">The field \'name\' is required.</string>
     <string name="new_entry">New Entry</string>
     <string name="total">Total: </string>
+    <string name="value">Value</string>
+    <string name="date">Date</string>
 </resources>
