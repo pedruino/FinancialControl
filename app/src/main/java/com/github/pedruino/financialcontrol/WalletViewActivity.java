@@ -40,6 +40,8 @@ public class WalletViewActivity extends AppCompatActivity implements View.OnClic
 
         final int walletIndex = intent.getIntExtra(PARAM_WALLET_INDEX, 0);
         this.wallet = FakeDatabase.getInstance().getWallets().get(walletIndex);
+        this.setTitle(this.wallet.getName());
+
         this.entries = this.wallet.getEntries();
 
         this.addEntryButton = findViewById(R.id.activity_wallet_view_create_entry_button);
