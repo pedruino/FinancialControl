@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Control financiero</string>
+    <string name="add">Añadir</string>
+    <string name="date">Fecha</string>
+    <string name="error_field_required_wallet_name">" El campo 'nombre' es obligatorio."</string>
+    <string name="hint_wallet_name">Escriba el nombre de la billetera</string>
+    <string name="new_entry">Nueva entrada</string>
+    <string name="new_wallet">Nueva Billetera</string>
+    <string name="total">Total</string>
+    <string name="value">Valor</string>
+    <string name="edit">Editar</string>
+    <string name="delete">Borrar</string>
+</resources>

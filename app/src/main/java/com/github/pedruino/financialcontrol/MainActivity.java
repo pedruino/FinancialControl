@@ -63,7 +63,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onWalletClick(int position) {
         Intent intent = new Intent(this, WalletViewActivity.class);
-        intent.putExtra(WalletViewActivity.PARAM_WALLET, this.wallets.get(position));
         intent.putExtra(WalletViewActivity.PARAM_WALLET_INDEX, position);
         startActivity(intent);
     }

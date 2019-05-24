@@ -39,7 +39,7 @@ public class WalletViewActivity extends AppCompatActivity implements View.OnClic
         Intent intent = getIntent();
 
         final int walletIndex = intent.getIntExtra(PARAM_WALLET_INDEX, 0);
-        this.wallet = FakeDatabase.getInstance().getWallets().get(walletIndex);//(Wallet) intent.getSerializableExtra(PARAM_WALLET);
+        this.wallet = FakeDatabase.getInstance().getWallets().get(walletIndex);
         this.entries = this.wallet.getEntries();
 
         this.addEntryButton = findViewById(R.id.activity_wallet_view_create_entry_button);
@@ -87,7 +87,7 @@ public class WalletViewActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void refreshBalance() {
-        String balance = this.getResources().getString(R.string.total) + Helper.currencyFormat(this.wallet.getBalance());
+        String balance = this.getResources().getString(R.string.total) + ":  " + Helper.currencyFormat(this.wallet.getBalance());
         this.summaryViewText.setText(balance);
     }
 
@@ -95,7 +95,6 @@ public class WalletViewActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onEntryClick(int position) {
         //TODO: Implement edition
-
 //        Intent intent = new Intent(this, EntryEditActivity.class);
 //        intent.putExtra(EntryEditActivity.PARAM_ENTRY, this.entries.get(position));
 //        startActivity(intent);
